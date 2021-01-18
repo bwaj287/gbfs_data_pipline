@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/gbfs_data_pipline.iml" filepath="$PROJECT_DIR$/.idea/modules/gbfs_data_pipline.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gbfs_data_pipline-build.iml" filepath="$PROJECT_DIR$/.idea/modules/gbfs_data_pipline-build.iml" />
     </modules>
   </component>
 </project>
