@@ -1,3 +1,4 @@
 [debug] not up to date. inChanged = true, force = false
 [debug] Updating ProjectRef(uri("file:/Users/vasusurani/IdeaProjects/gbfs_data_pipline/"), "gbfs_data_pipline")...
 [debug] Done updating ProjectRef(uri("file:/Users/vasusurani/IdeaProjects/gbfs_data_pipline/"), "gbfs_data_pipline")
+[warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.

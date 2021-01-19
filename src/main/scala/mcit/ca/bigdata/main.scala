@@ -1,5 +1,5 @@
 package mcit.ca.bigdata
 
-class main {
+class Main {
 
 }
