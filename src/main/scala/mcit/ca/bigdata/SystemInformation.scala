@@ -12,7 +12,7 @@ case class SystemInformation(
                             )
 
 case class SystemInformationSchema(
-                                    last_updated:String,
-                                    ttl:String,
+                                    last_updated:Int,
+                                    ttl:Int,
                                     data:SystemInformation
                                   )

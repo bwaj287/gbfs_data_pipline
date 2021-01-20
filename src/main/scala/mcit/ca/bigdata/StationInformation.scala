@@ -7,7 +7,7 @@ case class StationInformation(
                                lat:String,
                                lon:String,
                                region_id:Int,
-                               capacity:String
+                               capacity:Int
                              )
 
 case class Data(stations:Array[StationInformation])
