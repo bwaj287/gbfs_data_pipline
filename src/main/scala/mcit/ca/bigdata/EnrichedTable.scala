@@ -1,7 +1,6 @@
 package mcit.ca.bigdata
 
 class EnrichedTable {
-  val delTable = """DROP TABLE IF EXISTS winter2020_vasu.enriched_station_information"""
   val enrichedStationInfo =
     """CREATE TABLE winter2020_vasu.enriched_station_information (
       |station_id                     STRING,

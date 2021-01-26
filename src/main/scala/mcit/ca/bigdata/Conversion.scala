@@ -73,4 +73,13 @@ object Conversion extends App{
   val csvFile: DataFrame = stationData.crossJoin(systemData)
   csvFile.write.format("com.databricks.spark.csv").option("header", "True").mode("overwrite").option("sep", ",")
     .save("/Users/vasusurani/Downloads/Final Project Big Data/enrichedStationData")
+
+  stmt.execute("DROP TABLE IF EXISTS winter2020_vasu.enriched_station_information")
+  val enrichedStationInfo = new EnrichedTable().enrichedStationInfo
+  stmt.execute(enrichedStationInfo)
+
+/*
+  val wrData = new WriteData().writeTrips
+  stmt.execute(wrData)
+*/
 }
