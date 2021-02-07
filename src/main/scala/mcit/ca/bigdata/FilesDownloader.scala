@@ -3,29 +3,37 @@ package mcit.ca.bigdata
 import java.io.{BufferedWriter, File, FileWriter}
 import scala.io.Source
 
-object FilesDownloader {
-  val stationInfoUrl = Source.fromURL("https://gbfs.nextbike.net/maps/gbfs/v1/nextbike_pp/en/station_information.json")
-  val strStation = stationInfoUrl.mkString
+object FilesDownloader extends App {
 
-  def stationInfoWriteFile(filename: String, strStation: String): Unit = {
+  val si = Source.fromURL("https://gbfs.nextbike.net/maps/gbfs/v1/nextbike_pp/en/station_information.json")
+  val s = si.mkString
+
+  def siwriteFile(filename: String, s: String): Unit = {
     val file = new File(filename)
     val bw = new BufferedWriter(new FileWriter(file))
-    bw.write(strStation)
+    bw.write(s)
     bw.close()
   }
+  try{
+  siwriteFile("hdfs://quickstart.cloudera:8020/user/winter2020/vasu/finalproject/station_information/station_information.json", s)
+  }catch{
+        case e: Exception => println(e)
+      }
 
-  stationInfoWriteFile("/home/vasu/Downloads/Gbfs_downloads/station_information.json", strStation)
+  val sys = Source.fromURL("https://gbfs.nextbike.net/maps/gbfs/v1/nextbike_pp/en/system_information.json")
+  val sy = sys.mkString
 
-  val sysstemInfoUrl = Source.fromURL("https://gbfs.nextbike.net/maps/gbfs/v1/nextbike_pp/en/system_information.json")
-  val strSystem = sysstemInfoUrl.mkString
-
-  def systemInfoWriteFile(filename: String, strSystem: String): Unit = {
+  def sywriteFile(filename: String, sy: String): Unit = {
     val file = new File(filename)
     val bw = new BufferedWriter(new FileWriter(file))
-    bw.write(strSystem)
+    bw.write(sy)
     bw.close()
   }
+try {
+  sywriteFile("hdfs://quickstart.cloudera:8020/user/winter2020/vasu/finalproject/system_information/system_information.json", sy)
+}catch{
+     case e: Exception => println(e)
+   }
 
-  stationInfoWriteFile("/home/vasu/Downloads/Gbfs_downloads/system_information.json", strSystem)
-
+  println("Source files auto downloaded into LFS")
 }
