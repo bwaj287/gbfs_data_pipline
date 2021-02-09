@@ -27,6 +27,4 @@ class EnrichedTable {
       |LOCATION 'hdfs://quickstart.cloudera:8020/user/winter2020/vasu/finalproject/Enriched'
       |""".stripMargin
 
-  println("enriched_station_information TABLE was CREATED")
-
 }

@@ -7,8 +7,9 @@ trait  Main {
 
   val conf = new Configuration()
 
-  conf.addResource(new Path("/home/vasu/opt/hadoop-2.7.7/etc/cloudera/core-site.xml"))
-  conf.addResource(new Path("/home/vasu/opt/hadoop-2.7.7/etc/cloudera/hdfs-site.xml"))
+  conf.addResource(new Path("/Users/vasusurani/opt/hadoop-2.7.7/etc/cloudera/core-site.xml"))
+  conf.addResource(new Path("/Users/vasusurani/opt/hadoop-2.7.7/etc/cloudera/hdfs-site.xml"))
 
-  val fs = FileSystem.get(conf)
+  val fs: FileSystem = FileSystem.get(conf)
+
 }

@@ -16,7 +16,6 @@ class StationInformationTable {
       |STORED AS TEXTFILE
       |""".stripMargin
 
-
   val jsonStationInformationInsertion =
     """
       |INSERT OVERWRITE TABLE winter2020_vasu.json_station_information
@@ -27,6 +26,16 @@ class StationInformationTable {
       |SORT BY BLOCK__OFFSET__INSIDE__FILE) x
       |GROUP BY INPUT__FILE__NAME
       |""".stripMargin
+
+  val gjoStaionInformationTable = " CREATE TABLE winter2020_vasu.gjo_station_information AS SELECT " +
+    "split(get_json_object(c.json_body,'$.data.stations.station_id'),\",\") as id,  " +
+      "split(get_json_object(c.json_body,'$.data.stations.name'),\",\") as name,  " +
+      "split(get_json_object(c.json_body,'$.data.stations.short_name'),\",\") as short_name, " +
+      "split(get_json_object(c.json_body,'$.data.stations.lat'),\",\") as lat, " +
+      "split(get_json_object(c.json_body,'$.data.stations.lon'),\",\") as lon, " +
+      "split(get_json_object(c.json_body,'$.data.stations.region_id'),\",\") as region_id, " +
+      "split(get_json_object(c.json_body,'$.data.stations.capacity'),\",\") as capacity " +
+      "FROM winter2020_vasu.json_station_information c "
 
   val tableStationIdName =
     """

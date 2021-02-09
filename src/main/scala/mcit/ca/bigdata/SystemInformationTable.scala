@@ -10,13 +10,13 @@ class SystemInformationTable {
 
   val jsonSysInfoTable =
     """
-      |CREATE EXTERNAL TABLE winter2020_vasu.fj_system_information (json_body string)
+      |CREATE EXTERNAL TABLE winter2020_vasu.json_system_information (json_body string)
       |STORED AS TEXTFILE
       |""".stripMargin
 
   val jsonSysInfoInsertion =
     """
-      |INSERT OVERWRITE TABLE winter2020_vasu.fj_system_information
+      |INSERT OVERWRITE TABLE winter2020_vasu.json_system_information
       |SELECT CONCAT_WS(' ',COLLECT_LIST(textcol)) AS singlelineJSON
       |FROM (SELECT INPUT__FILE__NAME, BLOCK__OFFSET__INSIDE__FILE, textcol
       |FROM winter2020_vasu.string_system_information
@@ -30,7 +30,7 @@ class SystemInformationTable {
       |create table winter2020_vasu.gjo_system_information as select
       |get_json_object(c.json_body,'$.data.system_id') as system_id,
       |get_json_object(c.json_body,'$.data.timezone') as timezone
-      |from winter2020_vasu.fj_system_information c
+      |from winter2020_vasu.json_system_information c
       |""".stripMargin
 
 }
