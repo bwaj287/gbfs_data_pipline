@@ -27,10 +27,8 @@ class SystemInformationTable {
 
   val extSysInfo =
     """
-      |create table winter2020_vasu.system_information as select
+      |create table winter2020_vasu.gjo_system_information as select
       |get_json_object(c.json_body,'$.data.system_id') as system_id,
-      |get_json_object(c.json_body,'$.data.language') as language,
-      |get_json_object(c.json_body,'$.data.url') as url,
       |get_json_object(c.json_body,'$.data.timezone') as timezone
       |from winter2020_vasu.fj_system_information c
       |""".stripMargin

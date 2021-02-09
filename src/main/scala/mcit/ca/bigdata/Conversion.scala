@@ -1,4 +1,5 @@
 package mcit.ca.bigdata
+
 import java.sql.{Connection, DriverManager}
 import java.util.Calendar
 
@@ -6,19 +7,20 @@ object Conversion extends Main with App {
 
   val driverName: String = "org.apache.hive.jdbc.HiveDriver"
   Class.forName(driverName)
-  val connection: Connection = DriverManager.getConnection("jdbc:hive2://quickstart.cloudera:10000/winter2020_vasu;user=vasu;")
+  val connection: Connection = DriverManager.getConnection(
+    "jdbc:hive2://quickstart.cloudera:10000/winter2020_vasu;user=vasu;")
   val stmt = connection.createStatement()
   println("JSON Source files auto downloaded and uploaded to HDFS from LFS")
   stmt.execute("SET hive.exec.dynamic.partition.mode=nonstrict")
   println("1")
-  stmt.execute(" SET hive.auto.convert.join=true")
+  stmt.execute(" SET hive.auto.convert.join=true ")
   println("2")
   stmt.execute(" DROP TABLE IF EXISTS winter2020_vasu.string_station_information ")
   println("3")
   val stringStationInfoTable = new StationInformationTable().stringStationInformationTable
   stmt.execute(stringStationInfoTable)
   println("4")
-  stmt.execute(" DROP TABLE IF EXISTS winter2020_vasu.fj_station_information ")
+  stmt.execute(" DROP TABLE IF EXISTS winter2020_vasu.json_station_information ")
   println("5")
   val jsonStationInfoTable = new StationInformationTable().jsonStationInformationTable
   stmt.execute(jsonStationInfoTable)
@@ -26,10 +28,8 @@ object Conversion extends Main with App {
   val jsonStationInfoInsertion = new StationInformationTable().jsonStationInformationInsertion
   stmt.execute(jsonStationInfoInsertion)
   println("7")
-  stmt.execute(" DROP TABLE IF EXISTS winter2020_vasu.gjo_station_information")
+  stmt.execute(" DROP TABLE IF EXISTS winter2020_vasu.gjo_station_information ")
   println("8")
-//  val getJsonObjStationInfoTable = new StationInformationTable().getJsonObjectStationInformationTable
-//  stmt.execute(getJsonObjStationInfoTable)
   stmt.execute(" CREATE TABLE winter2020_vasu.gjo_station_information AS SELECT " +
     "split(get_json_object(c.json_body,'$.data.stations.station_id'),\",\") as id,  " +
     "split(get_json_object(c.json_body,'$.data.stations.name'),\",\") as name,  " +
@@ -38,7 +38,7 @@ object Conversion extends Main with App {
     "split(get_json_object(c.json_body,'$.data.stations.lon'),\",\") as lon, " +
     "split(get_json_object(c.json_body,'$.data.stations.region_id'),\",\") as region_id, " +
     "split(get_json_object(c.json_body,'$.data.stations.capacity'),\",\") as capacity " +
-    "FROM winter2020_vasu.fj_station_information c")
+    "FROM winter2020_vasu.json_station_information c")
   println("9")
   stmt.execute("DROP TABLE IF EXISTS winter2020_vasu.sid_name")
   println("10")
@@ -80,7 +80,7 @@ object Conversion extends Main with App {
   val jsonSystemInformationInsertion = new SystemInformationTable().jsonSysInfoInsertion
   stmt.execute(jsonSystemInformationInsertion)
   println("25")
-  stmt.execute("DROP TABLE IF EXISTS winter2020_vasu.system_information")
+  stmt.execute("DROP TABLE IF EXISTS winter2020_vasu.gjo_system_information")
   println("26")
   val extSystemInformation = new SystemInformationTable().extSysInfo
   stmt.execute(extSystemInformation)
